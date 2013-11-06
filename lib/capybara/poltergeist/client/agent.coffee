@@ -33,7 +33,7 @@ class PoltergeistAgent
         xpath   = document.evaluate(selector, within, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
         results = (xpath.snapshotItem(i) for i in [0...xpath.snapshotLength])
       else
-        results = within.querySelectorAll(selector)
+        results = $(within).find(selector)
 
       this.register(el) for el in results
     catch error
@@ -218,7 +218,7 @@ class PoltergeistAgent.Node
       rect  = win.frameElement.getClientRects()[0]
       style = win.getComputedStyle(win.frameElement)
       win   = win.parent
-      
+
       offset.top  += rect.top + parseInt(style.getPropertyValue("padding-top"), 10)
       offset.left += rect.left + parseInt(style.getPropertyValue("padding-left"), 10)
 
