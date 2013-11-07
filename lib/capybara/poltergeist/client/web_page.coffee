@@ -87,7 +87,10 @@ class Poltergeist.WebPage
 
   onResourceReceivedNative: (response) ->
     if response.stage == "end"
-      console.log("[netlog]", response.time.toLocaleTimeString(), "[" + response.status, response.statusText + "]", response.url, "(" + response.contentType + ")")
+      url = response.url
+      if response.redirectURL
+        url = url + " -> " + response.redirectURL
+      console.log("[netlog]", response.time.toLocaleTimeString(), "[" + response.status, response.statusText + "]", url, "(" + response.contentType + ")")
 
     @_networkTraffic[response.id]?.responseParts.push(response)
 
