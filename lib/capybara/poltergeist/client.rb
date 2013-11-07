@@ -30,6 +30,7 @@ module Capybara::Poltergeist
     end
 
     attr_reader :pid, :server, :path, :window_size, :phantomjs_options
+    attr_accessor :phantomjs_logger
 
     def initialize(server, options = {})
       @server            = server

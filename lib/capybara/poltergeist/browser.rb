@@ -10,7 +10,8 @@ module Capybara::Poltergeist
       "Poltergeist.InvalidSelector" => InvalidSelector
     }
 
-    attr_reader :server, :client, :logger
+    attr_reader :server, :client
+    attr_accessor :logger
 
     def initialize(server, client, logger = nil)
       @server = server
