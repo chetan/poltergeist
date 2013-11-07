@@ -72,6 +72,8 @@ class Poltergeist.WebPage
     @_errors.push(message: message, stack: stackString)
 
   onResourceRequestedNative: (request) ->
+    console.log("[netlog]", request.time.toLocaleTimeString(), "[" + request.method + "]", request.url)
+
     @lastRequestId = request.id
 
     if request.url == @redirectURL
@@ -84,6 +86,9 @@ class Poltergeist.WebPage
     }
 
   onResourceReceivedNative: (response) ->
+    if response.stage == "end"
+      console.log("[netlog]", response.time.toLocaleTimeString(), "[" + response.status, response.statusText + "]", response.url, "(" + response.contentType + ")")
+
     @_networkTraffic[response.id]?.responseParts.push(response)
 
     if @requestId == response.id
